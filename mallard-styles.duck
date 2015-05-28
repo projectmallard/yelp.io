@@ -1,0 +1,189 @@
+[[duck:ns e=http://projectmallard.org/experimental/]]
+
+= Mallard Style Hints in Yelp
+@link[guide >mallard]
+
+All elements in Mallard allow a style attribute that takes a
+space-separated list of style hints. Style hints may affect how
+a tool processes an element. They are non-normative, and tools
+are free to support any style hints they choose. Elements may
+list more than one style hint. In some cases, only a single
+hint is used. In other cases, hints may be combined.
+
+[links section]
+
+== Inline Styles
+   [#inline]
+
+- $code(em/@style = "strong")
+* The $code("strong") style hint on the inline $code(em) element makes text
+  bold instead of italic. 
+
+- $code(keyseq/@style = "hyphen")
+* The $code("hyphen") style hint on the inline $code(keyseq) element causes
+  a hyphen to be used instead of a plus sign as the key separator. 
+
+- $code(link/@style = "button")
+* The $code("button") style hint on the inline $code(link) element causes
+  the link to look like a button. This should usually be used for action links. 
+
+- $code(output/@style = "error")
+- $code(output/@style = "prompt")
+* The inline $code(output) element can take the style hints $code("error")
+  and $code("prompt") to indicate that the text is an error message or the
+  command prompt, respectively. This is most useful inside a $code(screen)
+  element. 
+
+
+== Block Styles
+   [#block]
+
+- $code(title/@style = "heading")
+* The $code("heading") style on a block $code(title) element (that is, not a
+  title of a page or section) causes the title to be formatted large, as if
+  it were a section title. Normally block titles are at the normal font size.
+
+- $code(title/@style = "center")
+* The $code("center") style on a block $code(title) element (that is, not a
+  title of a page or section) causes the title to be centered. Normally block
+  titles are aligned left, or aligned right for RTL locales.
+
+- $code(title/@style = "hidden")
+* The $code("hidden") style on page and section titles causes the title to
+  not be displayed. Titles are mandatory on pages and sections, but occasionally
+  with certain specialty styles, it's useful to hide them.
+
+  $e:hi(Since 3.12)
+
+- $code(desc/@style = "center")
+* The $code("center") style on a block $code(desc) element (that is, not one
+  found in an $code(info) element) causes the desc to be centered. Normally
+  block descs are aligned left, or aligned right for RTL locales.
+
+- $code(code/@style = "numbered")
+- $code(screen/@style = "numbered")
+* The block $code(code) and $code(screen) elements can both take
+  the $code("numbered") style hint to show line numbers. 
+
+- $code(note/@style = "advanced")
+- $code(note/@style = "bug")
+- $code(note/@style = "important")
+- $code(note/@style = "plain")
+- $code(note/@style = "sidebar")
+- $code(note/@style = "tip")
+- $code(note/@style = "warning")
+* The $code(note) element can take any of the preceding hints to
+  determine which icon is used. The special $code("sidebar") style
+  hint causes the note to be rendered as a non-intrusive box along
+  the side of the text. The $code("plain") style removes icons and
+  extra accessible information for a simple box with a background color. 
+
+- $code(list/@style = "compact")
+- $code(terms/@style = "compact")
+* On $code(list) and $code(terms) elements, using the $code("compact")
+  style hint reduces the amount of vertical padding around list items.
+  This is best used for lists of words or short phrases. 
+
+- $code(list/@style = "continues")
+- $code(steps/@style = "continues")
+* On $code(list) and $code(steps) elements, using the $code("continues")
+  style hint causes the list to start numbering where the previous
+  compatible list left off, just like the DocBook continuation attribute.
+  For a $code(steps) element, the previous compatible element is the
+  first preceding $code(steps) element. For a $code(list) element, the
+  previous compatible element is the first preceding list element with
+  the same $code(type) attribute. 
+
+- $code(tree/@style = "lines")
+* The $code("lines") style hint on the $code(tree) element causes lines
+  to be drawn to show the hierarchy. 
+
+- $code(media/@style = "floatstart")
+- $code(media/@style = "floatend")
+- $code(media/@style = "floatleft")
+- $code(media/@style = "floatright")
+* A block media element can be floated to the left or right using the
+  corresponding style hint. You should generally prefer the $code("floatstart")
+  and $code("floatend") hints. They behave just like $code("floatleft") and
+  $code("floatright"), except that they flip automatically for right-to-left
+  locales. 
+
+
+== Links Styles
+   [#links]
+
+- $code(links/@style = "mouseovers")
+* The $code("mouseovers") style on the $code(links) element provides an image
+  area and displays a thumbnail for each link in that area as you mouse over
+  the link. It uses the $code(e:mouseover) element to get the images. The
+  $code("mouseovers") style will be replaced by the $code(ui:thumbs) attribute.
+  Do not use it unless you are tracking Yelp development closely. 
+
+- $code(links/@style = "toronto")
+- $code(links/@style = "grid")
+* The $code("grid") style on the $code(links) element causes the links to be
+  formatted left-to-right in a three-column grid (two columns in the mobile
+  rendering). The $code("toronto") style does exactly the same thing, using a
+  less obvious name. This was one of the first links styles added, and it was
+  added during a doc sprint in Toronto. The $code("toronto") name is historical
+  and nostalgic, while the $code("grid") name is clearer. Both will continue to
+  work. 
+
+- $code(links/@style = "norwich")
+* The $code("norwich") style on a $code(links) element causes the links to be
+  formatted as a grid of tiles, designed to be used as the front splash page
+  for the GNOME help. This is a specialty style that may change in future
+  versions.
+
+  $e:hi(Since 3.12)
+
+- $code(links/@style = "button")
+* The $code("button") style on the $code(links) element causes the links to
+  be formatted to look like buttons.
+
+- $code(links/@style = "heading")
+* The $code("heading") style on the links element causes the links to be
+  formatted large and bold as if they were section headings.
+
+- $code(links/@style = "linklist")
+* The $code("linklist") style on the $code(links) element causes the links
+  to be formatted as a simple list. This is the default formatting for
+  $code("seealso") and $code("guide") links. 
+
+- $code(links/@style = "2column")
+* The $code("2column") style on the $code(links) element causes the links
+  to be formatted as link blocks (as is the default for $code("topic") links),
+  but top-to-bottom in two columns. It collapses to a single column in the
+  mobile rendering.
+
+- $code(links/@style = "center")
+* The $code("center") style on the $code(links) element causes links and
+  titles to be centered.
+
+- $code(links/@style = "bold")
+* The $code("bold") style on the $code(links) element causes link titles
+  (but not descs) to be bold even in styles where they otherwise would not
+  be, such as in the $code("linklist") style.
+
+- $code(links/@style = "nodesc")
+* The $code("nodesc") style on the $code(links) element causes the link
+  descs not to be displayed in any style where they otherwise would be. 
+
+- $code(links/@style = "floatstart")
+- $code(links/@style = "floatend")
+- $code(links/@style = "floatleft")
+- $code(links/@style = "floatright")
+* For $code("section") and $code("series") $code(links) elements only,
+  these styles causes the links to be be in a box floating to one side.
+  You should generally prefer the $code("floatstart") and $code("floatend")
+  hints. They behave just like $code("floatleft") and $code("floatright"),
+  except that they flip automatically for right-to-left locales. 
+
+- $code(links(prevnext)/@style = "top")
+* For $code("prevnext") $code(links) elements only, this causes the links
+  to appear at the top of the page, above where links elements would otherwise
+  be placed. Yelp automatically places $code("prevnext") links at the top and
+  bottom if you do not use a $code("prevnext") links element. But if you use
+  any $code("prevnext") links element, it overrides the default. This style
+  is the only way to get the $code("prevnext") links at the top while also
+  putting them elsewhere.

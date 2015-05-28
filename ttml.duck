@@ -1,0 +1,48 @@
+[[duck:ns e=http://projectmallard.org/experimental/]]
+
+= TTML
+@link[guide >features]
+@link[guide >mallard]
+
+Yelp supports $link[>>http://www.w3.org/TR/ttaf1-dfxp/](TTML) subtitles in
+Mallard audio and video block
+$code[>>http://projectmallard.org/1.0/mal_block_media.html](media) elements.
+To add subtitles, include a $code(tt:tt) element as a child of the $code(media)
+element.
+
+[listing]
+[desc]
+  Example from the Tetravex help:
+[code]
+<tt:tt xmlns:tt="http://www.w3.org/ns/ttml">
+  <tt:body>
+    <tt:div begin="1s" end="6s">
+      <tt:p>Drag pieces from the right to the left, making sure that                                  
+      adjacent edges have the same number and color.</tt:p>
+    </tt:div>
+    <tt:div begin="6s" end="14s">
+      <tt:p>Hold down <key>Ctrl</key> and press the arrow keys to move                                
+      all placed pieces at once.</tt:p>
+    </tt:div>
+    <tt:div begin="14s" end="22s">
+      <tt:p>Continue dragging pieces until they all fit together on the left.</tt:p>
+    </tt:div>
+  </tt:body>
+</tt:tt>
+
+Begin and end times can be specified on $code(tt:div), $code(tt:p), and $code(tt:span)
+elements. In standard TTML, a $code(tt:div) element can contain other $code(tt:div)
+elements and $code(tt:p) elements, and a $code(tt:p) element can contain text,
+$code(tt:span) elements, and $code(tt:br) elements. Time ranges on child elements
+are relative to time ranges on parent elements.
+
+Mallard extends TTML to allow you to use any
+$link[>>http://projectmallard.org/1.0/mal_block.html](block elements) in a $code(tt:div)
+element and any
+$link[>>http://projectmallard.org/1.0/mal_inline.html](inline elements) in a $code(tt:p)
+or $code(tt:span) element. For example, in the TTML above, the Mallard $code(key)
+element is used inline in a $code(tt:p) element.
+
+$e:hi(Basic support added in 3.0. Support for the $code(dur) attribute, the $code(tt:br)
+element, the $code(h) and $code(m) time units, and checking profiles added in 3.4.
+Support for TTML for audio elements added in 3.8.)

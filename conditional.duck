@@ -1,0 +1,148 @@
+[[duck:ns e=http://projectmallard.org/experimental/]]
+
+= Conditional Processing
+@link[guide >features]
+
+Yelp supports conditional processing in both Mallard and DocBook. The Yelp
+viewer automatically determines information about the environment and sets
+test tokens or profiling values at run time. This allows a single document
+to be packaged for multiple systems and displayed correctly based on the
+reader's environment.
+
+== Mallard
+   [#mallard]
+@link[guide >mallard]
+@title[link] Mallard Conditional Processing
+
+Mallard conditional processing is handled by the
+$link[>>http://projectmallard.org/if/1.0/](Mallard Conditionals) extension.
+Mallard Conditionals allows you to string together test tokens in a test
+expression. The Yelp stylesheets, tools, and viewer all set certain tokens,
+and you can set your own with the $code(mal.if.custom) parameter.
+
+The Yelp viewer automatically sets the following platform tokens:
+
+[terms]
+- $code(platform:gnome-shell)
+* Set if a D-Bus service named $sys(org.gnome.Shell) is running and a D-Bus
+  service named $sys(com.canonical.Unity) is not running. Use this token for
+  GNOME 3. This will also be set in classic mode. To check for GNOME 3 not
+  in classic mode, use $code("platform:gnome-shell !platform:gnome-classic").
+  This will also be set for GNOME-3-derivative environments like Cinnamon.
+
+  $e:hi(Added in 3.4)
+
+- $code(platform:gnome-classic)
+* Set if the $sys(Mode) property of the $sys(org.gnome.Shell) service is
+  $sys("classic"). Use this token for GNOME 3 in classic mode.
+
+  $e:hi(Added in 3.8.1)
+
+- $code(platform:unity)
+* Set if a D-Bus service named $sys(com.canonical.Unity) is running. Use this
+  token for Ubuntu's Unity environment.
+
+  $e:hi(Added in 3.10)
+
+- $code(platform:xfce)
+* Set if a D-Bus service named $sys(org.xfce.Panel) is running. Use this token for Xfce.
+
+  $e:hi(Added in 3.4)
+
+- $code(platform:gnome-panel)
+* Set if a D-Bus service named $sys(org.gnome.Panel) is running and a D-Bus
+  service named $sys(org.gnome.Shell) is not running. This token is set for
+  GNOME 2, fallback mode in early GNOME 3 versions, and GNOME-2-derivative
+  environments like Mate. There is currently no way of distinguishing between
+  these environments.
+
+  $e:hi(Added in 3.4 )
+
+- $code(platform:$var(distro))
+- $code(platform:$var(distro)-$var(version))
+* Set based on the $file(os-release) file. The distro name is taken from the
+  $code(ID) field. For example, on Fedora, the token $code(platform:fedora)
+  is set. The version is taken from the $code(VERSION_ID) field. For example,
+  on Fedora 21, the token $code(platform:fedora-21) is set.
+
+  $e:hi(Added in 3.18)
+
+The Yelp stylesheets set feature tokens based on supported features. See
+$link[>mallard-features] for more information.
+
+The Yelp stylesheets set target tokens depending on the target format.
+
+[terms]
+- $code(target:html)
+* Set for all HTML targets, including XHTML.
+
+- $code(target:xhtml)
+* Set only for the XHTML serialization of HTML, in addition to the
+  $code(target:html) token.
+
+- $code(target:mobile)
+* Set as a $em(maybe) value for all HTML transforms to allow responsive
+  content. Any content marked with $code(target:mobile) will only be
+  displayed on mobile platforms. Any content marked with $code(!target:mobile)
+  will only be displayed on non-mobile platforms. Yelp uses CSS media queries
+  on screen size to determine when to display content.
+
+- $code(target:epub)
+* Set for EPUB transformations when using $cmd(yelp-build epub). EPUB contains
+  XHTML files, so $code(target:html) and $(target:xhtml) will also be set.
+
+
+== DocBook
+   [#docbook]
+@title[link] DocBook Conditional Processing
+
+The Yelp viewer automatically sets the following profiling values to match against
+with the $code(os) attribute:
+
+[terms]
+- $code(gnome-shell)
+* Set if a D-Bus service named $sys(org.gnome.Shell) is running and a D-Bus service
+  named $sys(com.canonical.Unity) is not running. Use this value for GNOME 3. This
+  will also be set in classic mode and GNOME-3-derivative environments like Cinnamon.
+
+  $e:hi(Added in 3.10)
+
+- $code(gnome-classic)
+* Set if the Mode property of the $sys(org.gnome.Shell) service is $sys("classic").
+  Use this value for GNOME 3 in classic mode.
+
+  $e:hi(Added in 3.10)
+
+- $code(unity)
+* Set if a D-Bus service named $sys(com.canonical.Unity) is running. Use this value
+  for Ubuntu's Unity environment.
+
+  $e:hi(Added in 3.10)
+
+- $code(xfce)
+* Set if a D-Bus service named $sys(org.xfce.Panel) is running. Use this value for Xfce.
+
+  $e:hi(Added in 3.10)
+
+- $code(gnome-panel)
+* Set if a D-Bus service named $sys(org.gnome.Panel) is running and a D-Bus service
+  named $sys(org.gnome.Shell) is not running. This value is set for GNOME 2, fallback
+  mode in early GNOME 3 versions, and GNOME-2-derivative environments like Mate.
+  There is currently no way of distinguishing between these environments.
+
+  $e:hi(Added in 3.10)
+
+- $code($var(distro))
+- $code($var(distro)-$var(version))
+* Set based on the $file(os-release) file. The distro name is taken from the
+  $code(ID) field. For example, on Fedora, the value $code(fedora) is set.
+  The version is taken from the $code(VERSION_ID) field. For example, on
+  Fedora 21, the value $code(platform:fedora-21) is set.
+
+  $e:hi(Added in 3.18)
+
+Yelp does not perform a pre-processing filter for conditional processing in DocBook.
+Rather, the profiling is done by the XSLT templates at transformation time.
+Consequently, Yelp only supports conditional processing on a subset of DocBook
+elements. Generally, conditional processing works on all block-level and inline
+elements.

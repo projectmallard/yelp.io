@@ -1,0 +1,56 @@
+= Yelp Features
+  [guide]
+@link[guide >index]
+
+This page provides a table of what features Yelp supports in Mallard,
+DocBook, and DITA. This is not a comparison of the languages themselves.
+In some cases the language doesn't provide for the feature. In other
+cases, Yelp simply does not support the language's mechanisms for the
+feature.
+
+[note .warning]
+DITA Support is currently experimental and not included in the build.
+
+[table]
+[thead]
+[tr]
+* 
+* $link[>mallard](Mallard)
+* DocBook
+* DITA
+[tbody]
+[tr]
+* $link[>audiovideo](Audio)
+* Yes
+* Yes
+* No
+[tr]
+* $link[>audiovideo](Video)
+* Yes
+* Yes
+* No
+[tr]
+* $link[>ttml](TTML Subtitles)
+* Yes
+* No
+* No
+[tr]
+* $link[>mathml](MathML)
+* Yes
+* Yes
+* No
+[tr]
+* SVG
+* Yes
+* No
+* No
+[tr]
+* $link[>conditional](Conditional Processing)
+* Yes
+* Partial
+* No
+[tr]
+* Syntax Highlighting
+* Yes
+* Yes
+* No 

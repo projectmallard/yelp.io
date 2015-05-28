@@ -1,0 +1,57 @@
+[[duck:ns e=http://projectmallard.org/experimental/]]
+
+= MathML
+@link[guide >features]
+
+Yelp supports $link[>>http://www.w3.org/Math/](MathML) in both Mallard and
+DocBook documents. In both cases, you can use MathML both inline and as a
+block element. In Mallard, you can use Mallard's internal linking mechanism
+on MathML elements.
+
+Yelp uses the $link[>>http://www.mathjax.org/](MathJax) library to support
+MathML in all modern browsers and browser engines. The default output of the
+Yelp XSLT uses $code(cdn.mathjax.org). The Yelp viewer bundles a subset of
+MathJax, allowing it to display MathML in its embedded ?WebKit viewer without
+using the network.
+
+== Mallard
+   [#mallard]
+@link[guide >mallard]
+@title[link] Mallard and MathML
+
+To add MathML to a Mallard document, use an $code(mml:math) element in any
+block or inline context. Yelp automatically sets the $code(display) attribute
+of the output $code(mml:math) element according to context, even overriding
+any source value.
+
+You can use the namespaced
+$code[>>http://projectmallard.org/1.0/mal_attr_link.html](mal:xref) attribute
+on any MathML element to link to another page in the same document.
+
+$e:hi(Added in 3.8.)
+
+== DocBook
+   [#docbook]
+@title[link] DocBook and MathML
+
+To add MathML to a DocBook document, use an $code(mml:math) element inside an
+$code(equation) element
+($link[>>http://docbook.org/tdg/en/html/equation.html](4) or
+$link[>>http://docbook.org/tdg5/en/html/equation.html](5)), $code(informalequation)
+element ($link[>>http://docbook.org/tdg/en/html/informalequation.html](4) or
+$link[>>http://docbook.org/tdg5/en/html/informalequation.html](5)), or
+$code(inlineequation) element
+($link[>>http://docbook.org/tdg/en/html/inlineequation.html](4) or
+$link[>>http://docbook.org/tdg5/en/html/inlineequation.html](5)). Or, in DocBook 5
+only, use an $code(mml:math) element inside an $code(imagedata) element with the
+$code(format) attribute set to $code("mathml").
+
+An $code(mml:math) element is considered a block element if it occurs in an
+$code(equation) or $code(informalequation) element, or if it occurs in an
+$code(imageobject) element in a $code(mediaobject) element. An $code(mml:math)
+element is considered inline if it occurs in an $code(inlineequation) element,
+or if it occurs in an $code(imageobject) element in an $code(inlinemediaobject)
+element. Yelp automatically sets the $code(display) attribute of the output
+$code(mml:math) element accordingly, even overriding any source value.
+
+$e:hi(Added in 3.8.)

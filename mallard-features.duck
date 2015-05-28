@@ -1,0 +1,146 @@
+[[duck:ns e=http://projectmallard.org/experimental/]]
+
+= Mallard Features in Yelp
+@link[guide >mallard]
+
+The following features are listed according to their
+$link[>>http://projectmallard.org/if/1.0/tokens.html#feature](feature tokens),
+as defined by $link[>>http://projectmallard.org/if/1.0/](Mallard Conditionals 1.0).
+
+[terms]
+- $code("$link[>>http://projectmallard.org/1.0/](1.0)")
+* Yelp fully supports $link[>>http://projectmallard.org/1.0/](Mallard 1.0).
+
+  $e:hi(Added in 3.0.)
+
+- $code("$link[>>http://projectmallard.org/cache/1.0/](cache/1.0)")
+* Yelp supports the upcoming $link[>>http://projectmallard.org/cache/1.0/](Cache
+  Files 1.0) extension for creating a cache file with information about the
+  pages in the documents. The Yelp stylesheets require a cache file to work
+  correctly. Use $cmd(yelp-build cache) to create a cache file.
+
+  $e:hi(Added in 3.0.)
+
+- $code("$link[>>http://projectmallard.org/if/1.0/](if/1.0)")
+* Yelp fully supports the $link[>>http://projectmallard.org/if/1.0/](Mallard
+  Conditionals 1.0) extension. The HTML output also supports $code("maybe")
+  values, whose values are determined dynamically after rendering to HTML.
+  This is currently used for the adaptive mobile rendering.
+
+  See $link[>conditional]
+
+  $e:hi(Added in 3.4.)
+
+- $code("$link[>>http://projectmallard.org/facet/1.0/](facet/1.0)")
+* Yelp supports the current draft of the
+  $link[>>http://projectmallard.org/facet/1.0/](Facets 1.0) extension.
+  This extension is still likely to change incompatibly.
+
+  $e:hi(Added in 3.0.)
+
+- $code("$link[>>http://projectmallard.org/svg/1.0/](svg/1.0)")
+* Mallard supports embedding SVG per the upcoming
+  $link[>>http://projectmallard.org/svg/1.0/](Mallard+SVG 1.0)
+  extension. See the $link[>>http://projectmallard.org/about/learn/svg](Mallard
+  and SVG tutorial) for more information.
+
+  $e:hi(Added in 3.0.)
+
+- $code("$link[>>http://projectmallard.org/ttml/1.0/](ttml/1.0)")
+* Mallard supports embedding TTML into media elements for subtitles per the upcoming
+  $link[>>http://projectmallard.org/ttml/1.0/](Mallard+TTML 1.0) extension. Read a
+  See the $link[>>http://projectmallard.org/about/learn/ttml](Mallard and TTML
+  tutorial) for more information.
+
+  See $link[>ttml].
+
+  $e:hi(Added in 3.4.)
+
+- $code("$link[>>http://projectmallard.org/ui/1.0/ui_expanded.html](ui/1.0#expanded)")
+* Yelp supports the $code(ui:expanded) attribute as specified in the draft
+  $link[>>http://projectmallard.org/ui/1.0/](Mallard UI 1.0 extension). This
+  feature is very unlikely to change incompatibly.
+
+  $e:hi(Added in 3.8.)
+
+
+== Experimental
+   [#experimental]
+
+[note .warning]
+Any feature in an experimental namespace is absolutely guaranteed to break
+in a future version of Yelp. Experimental namespaces are how we try new
+ideas. Do not use experimental features unless you track the Yelp version
+closely.
+
+[terms]
+- $code($em[.strong](e:hi))
+- $code(xmlns:e="http://projectmallard.org/experimental/")
+* Yelp supports the inline $code(e:hi) element to highlight some text with a
+  background color. This is useful when successively adding lines to a code
+  example. Mallard 1.1 will probably contain this element outside the
+  experimental namespace.
+
+  $e:hi(Added in 3.0.)
+
+- $code($em[.strong](e:mouseover))
+- $code(xmlns:e="http://projectmallard.org/experimental/")
+* The $code(e:mouseover) element is used together with the $code("mouseovers")
+  style hint on topic links elements. The $code(e:mouseover) element provides
+  a thumbnail image for a link target. Do not use unless you are closely tracking
+  Yelp development. This syntax will be dropped when $code(ui:thumbs) is finished.
+
+  $e:hi(Added in 3.0.)
+
+- $code($em[.strong](uix:expanded))
+- $code(xmlns:uix="http://projectmallard.org/experimental/ui/")
+* The $code(uix:expanded) attribute can be used on any section element, links
+  element, or block element with a title.
+
+  As of 3.8, $code(ui:expanded) is supported in the non-experimental namespace
+  $code(ui/1.0). Experimental support will be dropped in a future version. When
+  you switch to non-experimental, change $code(yes)/$code(no) to $code(true)/$code(false).
+
+  $e:hi(Added in 3.2.)
+
+- $code($em[.strong](uix:overlay))
+- $code(xmlns:uix="http://projectmallard.org/experimental/ui/")
+* The $code(uix:overlay) element lets you pop up an image or video in an overlay.
+
+  $e:hi(Added in 3.8.)
+
+- $code($em[.strong](uix:thumb))
+- $code(xmlns:uix="http://projectmallard.org/experimental/ui/")
+* The $code(uix:thumb) element is used inside the $code(info) element. It provides
+  a thumbnail image for a page or section. It is used by the $code(uix:thumbs)
+  extension for the $code(links) element, and may be used by other extensions.
+
+  $e:hi(Added in 3.4.)
+
+- $code($em[.strong](uix:thumbs))
+- $code(xmlns:uix="http://projectmallard.org/experimental/ui/")
+* The $code(uix:thumbs) attribute on the $code(links) element specifies a way
+  to display the links as thumbnail images, using the $code(uix:thumb) elements
+  from the target nodes. This is a replacement for the $code("mouseovers") style.
+
+  $e:hi(Added in 3.8.)
+
+- $code($em[.strong]("experimental/api"))
+- $code(xmlns:api="http://projectmallard.org/experimental/api/")
+* The experimental API extenion lets you specify information about what class,
+  method, or other piece of API a page or section documents, such that links
+  to those nodes from links elements can be automatically formatted as synopses.
+  Minimal support is in released version. More work is being done on the
+  $sys(wip/api-1-0) branch.
+
+  $e:hi(Added in 3.2.)
+
+- $code($em[.strong]("experimental/gloss"))
+- $code(xmlns:gloss="http://projectmallard.org/experimental/gloss/")
+* The experimental Glossaries extension is a way to provide dynamic glossary
+  and index entries that are collected on special collection pages.
+
+  See $link[>>http://blogs.gnome.org/shaunm/2011/07/07/mallard-glossaries/](Mallard
+  Glossaries) on $link[>>http://blogs.gnome.org/shaunm/](Shaun's Blog) for an example.
+
+  $e:hi(Added in 3.2.)

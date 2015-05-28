@@ -1,0 +1,10 @@
+= Yelp & Mallard
+  [guide]
+@link[guide >index]
+
+These pages provide details on the
+$link[>>http://projectmallard.org/](Mallard) support in Yelp and the
+Yelp XSL stylesheets. They detail which versions and extensions are
+supported, which experimental extensions are under development, and
+which style hints are supported.
+

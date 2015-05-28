@@ -1,0 +1,13 @@
+= Yelp
+  [guide]
+@link[topic >/tools/index]
+
+[media src=screenshot.png width=200 .floatend]
+
+Yelp is the help viewer in Gnome. It natively views Mallard, DocBook,
+man, info, and HTML documents. It can locate documents according to
+the freedesktop.org help system specification.
+
+Yelp development has led to the development of various tools, and the
+Mallard and DocBook transformations live in standalone XSLT module.
+All of these are under the umbrella name Yelp. 

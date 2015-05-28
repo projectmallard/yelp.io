@@ -1,0 +1,47 @@
+[[duck:ns e=http://projectmallard.org/experimental/]]
+
+= Yelp Audio & Video
+@link[guide >features]
+
+Yelp supports adding audio and video objects to documents.
+It uses the HTML5 $code(<audio>) and $code(<video>) elements.
+
+== Mallard
+   [#mallard]
+@link[guide >mallard]
+@title[link] Mallard Audio & Video
+
+To add audio or video to a Mallard document, use the $code(media) element
+($link[>>http://projectmallard.org/1.0/mal_block_media.html](block) or
+$link[>>http://projectmallard.org/1.0/mal_inline_media.html](inline)),
+and set the $code(type) attribute to $code("audio") or $code("video").
+See also $link[>ttml] for information on adding subtitles to audio and
+video objects in Mallard documents.
+
+Yelp will use the non-TTML contents of the media element as the fallback
+content in HTML. To provide an image to use for the HTML video $code(poster)
+attribute, provide a child image $code(media) element with the $code(style)
+attribute set to $code("poster").
+
+$e:hi(Added in 3.0.)
+
+== DocBook
+@title[link] DocBook Audio & Video
+
+To add audio to a DocBook document, use the $code(audioobject) element
+($link[>>http://docbook.org/tdg/en/html/audioobject.html](4) or
+$link[>>http://docbook.org/tdg5/en/html/audioobject.html](5)) in a
+$code(mediaobject) or $code(inlinemediaobject) element. To add video,
+use the $code(videoobject) element
+($link[>>http://docbook.org/tdg/en/html/videoobject.html](4) or
+$link[>>http://docbook.org/tdg5/en/html/videoobject.html](5)).
+
+Yelp will use a $code(textobject) element
+($link[>>http://docbook.org/tdg/en/html/textobject.html](4) or
+$link[>>http://docbook.org/tdg5/en/html/textobject.html](5)) from the
+containing $code(mediaobject) or $code(inlinemediaobject) for the fallback
+content in HTML. If inline, Yelp uses a $code(textobject) that contains
+a $code(phrase) element. Otherwise, it uses a textobject that contains
+normal block content.
+
+$e:hi(Added in 3.8.)
