@@ -27,10 +27,6 @@ Free Software Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA
 
 <xsl:param name="theme.icons.size.note" select="24"/>
 
-<xsl:param name="color.yellow_border" select="'#fcaf3e'"/>
-<xsl:param name="color.text_light" select="'#555753'"/>
-<xsl:param name="color.blue_border" select="'#3465a4'"/>
-
 <xsl:template name="html.head.custom">
   <link href="http://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet" type="text/css"/>
   <link href="http://fonts.googleapis.com/css?family=Bitter:400,700" rel="stylesheet" type="text/css"/>
@@ -102,6 +98,19 @@ span.hi {
   padding: 2px 8px;
   border-radius: 2px;
 }
+div.code, div.screen {
+  background: #eeeeec url(eeeeec.png);
+  font-size: 16px;
+}
+pre {
+  background: rgba(255, 255, 255, 0.3);
+}
+td.td-yes {
+  background: rgba(138, 226, 52, 0.2);
+}
+td.td-no {
+  background: rgba(239, 41, 41, 0.1);
+}
 </xsl:text>
 </xsl:template>
 
@@ -127,5 +136,13 @@ span.hi {
 <xsl:template name="html.bottom.custom">
 </xsl:template>
 
+<xsl:template mode="html.class.attr.mode" match="mal:td">
+  <xsl:if test=". = 'Yes'">
+    <xsl:text>td-yes</xsl:text>
+  </xsl:if>
+  <xsl:if test=". = 'No'">
+    <xsl:text>td-no</xsl:text>
+  </xsl:if>
+</xsl:template>
 
 </xsl:stylesheet>
