@@ -27,7 +27,7 @@ as defined by $link[>>http://projectmallard.org/if/1.0/](Mallard Conditionals 1.
   values, whose values are determined dynamically after rendering to HTML.
   This is currently used for the adaptive mobile rendering.
 
-  See $link[>conditional]
+  See $link[>conditional].
 
   $e:hi(Added in 3.4.)
 
@@ -48,7 +48,7 @@ as defined by $link[>>http://projectmallard.org/if/1.0/](Mallard Conditionals 1.
 
 - $code("$link[>>http://projectmallard.org/ttml/1.0/](ttml/1.0)")
 * Mallard supports embedding TTML into media elements for subtitles per the upcoming
-  $link[>>http://projectmallard.org/ttml/1.0/](Mallard+TTML 1.0) extension. Read a
+  $link[>>http://projectmallard.org/ttml/1.0/](Mallard+TTML 1.0) extension.
   See the $link[>>http://projectmallard.org/about/learn/ttml](Mallard and TTML
   tutorial) for more information.
 
