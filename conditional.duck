@@ -23,40 +23,66 @@ and you can set your own with the $code(mal.if.custom) parameter.
 The Yelp viewer automatically sets the following platform tokens:
 
 [terms]
+- $code(platform:gnome-3)
+* Set for standard GNOME 3. Not set for GNOME 3 Classic or any known derivative
+  environments of GNOME 3. Note that the $code(platform:gnome-shell) token will
+  also be set if this token is set.
+
+  $e:hi(Added in 3.18)
+
 - $code(platform:gnome-shell)
-* Set if a D-Bus service named $sys(org.gnome.Shell) is running and a D-Bus
-  service named $sys(com.canonical.Unity) is not running. Use this token for
-  GNOME 3. This will also be set in classic mode. To check for GNOME 3 not
-  in classic mode, use $code("platform:gnome-shell !platform:gnome-classic").
-  This will also be set for GNOME-3-derivative environments like Cinnamon.
+* Set in any environment using GNOME Shell, including GNOME 3, GNOME 3 Classic,
+  Cinnamon, Elementary Pantheon, and Endless.
 
   $e:hi(Added in 3.4)
 
 - $code(platform:gnome-classic)
-* Set if the $sys(Mode) property of the $sys(org.gnome.Shell) service is
-  $sys("classic"). Use this token for GNOME 3 in classic mode.
+* Set for GNOME 3 Classic, an environment using GNOME 3 technologies but modified
+  to look more like a traditional GNOME desktop. This is $em(not) the same as the
+  fallback mode that shipped with early versions of GNOME 3. Note that the
+  $code(platform:gnome-shell) token will also be set if this token is set.
 
   $e:hi(Added in 3.8.1)
 
+- $code(platform:gnome-panel)
+* Set in any environment that uses the GNOME 2 panel, including GNOME 2 and MATE,
+  as well as the fallback mode shipped in early versions of GNOME 3.
+
+  $e:hi(Added in 3.4)
+
+- $code(platform:cinnamon)
+* Set for the Cinnamon desktop environment, which is based off of GNOME 3. Note
+  that the $code(platform:gnome-shell) token will also be set if this token is set.
+
+  $e:hi(Added in 3.18)
+
+- $code(platform:kde)
+* Set for any version of the KDE desktop environment.
+
+  $e:hi(Added in 3.18)
+
+- $code(platform:mate)
+* Set for the MATE desktop environment, which is based off of GNOME 2. Note that
+  the $code(platform:gnome-panel) token will also be set if this token is set.
+
+  $e:hi(Added in 3.18)
+
+- $code(platform:pantheon)
+* Set for the Pantheon desktop environment that is part of Elementary, which is
+  based off of GNOME 3. Note that the $code(platform:gnome-shell) token will also
+  be set if this token is set.
+
+  $e:hi(Added in 3.18)
+
 - $code(platform:unity)
-* Set if a D-Bus service named $sys(com.canonical.Unity) is running. Use this
-  token for Ubuntu's Unity environment.
+* Set for the Unity desktop environment that is part of Ubuntu.
 
   $e:hi(Added in 3.10)
 
 - $code(platform:xfce)
-* Set if a D-Bus service named $sys(org.xfce.Panel) is running. Use this token for Xfce.
+* Set for any version of the Xfce desktop environment.
 
   $e:hi(Added in 3.4)
-
-- $code(platform:gnome-panel)
-* Set if a D-Bus service named $sys(org.gnome.Panel) is running and a D-Bus
-  service named $sys(org.gnome.Shell) is not running. This token is set for
-  GNOME 2, fallback mode in early GNOME 3 versions, and GNOME-2-derivative
-  environments like Mate. There is currently no way of distinguishing between
-  these environments.
-
-  $e:hi(Added in 3.4 )
 
 - $code(platform:$var(distro))
 - $code(platform:$var(distro)-$var(version))
@@ -100,44 +126,73 @@ The Yelp viewer automatically sets the following profiling values to match again
 with the $code(os) attribute:
 
 [terms]
-- $code(gnome-shell)
-* Set if a D-Bus service named $sys(org.gnome.Shell) is running and a D-Bus service
-  named $sys(com.canonical.Unity) is not running. Use this value for GNOME 3. This
-  will also be set in classic mode and GNOME-3-derivative environments like Cinnamon.
+- $code(gnome-3)
+* Set for standard GNOME 3. Not set for GNOME 3 Classic or any known derivative
+  environments of GNOME 3. Note that the $code(gnome-shell) value will also be
+  set if this value is set.
 
-  $e:hi(Added in 3.10)
+  $e:hi(Added in 3.18)
+
+- $code(gnome-shell)
+* Set in any environment using GNOME Shell, including GNOME 3, GNOME 3 Classic,
+  Cinnamon, Elementary Pantheon, and Endless.
+
+  $e:hi(Added in 3.4)
 
 - $code(gnome-classic)
-* Set if the Mode property of the $sys(org.gnome.Shell) service is $sys("classic").
-  Use this value for GNOME 3 in classic mode.
+* Set for GNOME 3 Classic, an environment using GNOME 3 technologies but modified
+  to look more like a traditional GNOME desktop. This is $em(not) the same as the
+  fallback mode that shipped with early versions of GNOME 3. Note that the
+  $code(gnome-shell) value will also be set if this value is set.
 
-  $e:hi(Added in 3.10)
+  $e:hi(Added in 3.8.1)
+
+- $code(gnome-panel)
+* Set in any environment that uses the GNOME 2 panel, including GNOME 2 and MATE,
+  as well as the fallback mode shipped in early versions of GNOME 3.
+
+  $e:hi(Added in 3.4)
+
+- $code(cinnamon)
+* Set for the Cinnamon desktop environment, which is based off of GNOME 3. Note
+  that the $code(gnome-shell) value will also be set if this value is set.
+
+  $e:hi(Added in 3.18)
+
+- $code(kde)
+* Set for any version of the KDE desktop environment.
+
+  $e:hi(Added in 3.18)
+
+- $code(mate)
+* Set for the MATE desktop environment, which is based off of GNOME 2. Note that
+  the $code(gnome-panel) value will also be set if this value is set.
+
+  $e:hi(Added in 3.18)
+
+- $code(pantheon)
+* Set for the Pantheon desktop environment that is part of Elementary, which is
+  based off of GNOME 3. Note that the $code(gnome-shell) value will also be set
+  if this value is set.
+
+  $e:hi(Added in 3.18)
 
 - $code(unity)
-* Set if a D-Bus service named $sys(com.canonical.Unity) is running. Use this value
-  for Ubuntu's Unity environment.
+* Set for the Unity desktop environment that is part of Ubuntu.
 
   $e:hi(Added in 3.10)
 
 - $code(xfce)
-* Set if a D-Bus service named $sys(org.xfce.Panel) is running. Use this value for Xfce.
+* Set for any version of the Xfce desktop environment.
 
-  $e:hi(Added in 3.10)
-
-- $code(gnome-panel)
-* Set if a D-Bus service named $sys(org.gnome.Panel) is running and a D-Bus service
-  named $sys(org.gnome.Shell) is not running. This value is set for GNOME 2, fallback
-  mode in early GNOME 3 versions, and GNOME-2-derivative environments like Mate.
-  There is currently no way of distinguishing between these environments.
-
-  $e:hi(Added in 3.10)
+  $e:hi(Added in 3.4)
 
 - $code($var(distro))
 - $code($var(distro)-$var(version))
 * Set based on the $file(os-release) file. The distro name is taken from the
   $code(ID) field. For example, on Fedora, the value $code(fedora) is set.
   The version is taken from the $code(VERSION_ID) field. For example, on
-  Fedora 21, the value $code(platform:fedora-21) is set.
+  Fedora 21, the value $code(fedora-21) is set.
 
   $e:hi(Added in 3.18)
 
