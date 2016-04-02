@@ -1,6 +1,7 @@
 = Yelp
   [guide]
 @link[topic >/tools/index]
+@link[topic >/xsl/index]
 
 [media src=screenshot.png width=200 .floatend]
 
