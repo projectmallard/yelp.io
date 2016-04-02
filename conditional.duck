@@ -115,7 +115,7 @@ The Yelp stylesheets set target tokens depending on the target format.
 
 - $code(target:epub)
 * Set for EPUB transformations when using $cmd(yelp-build epub). EPUB contains
-  XHTML files, so $code(target:html) and $(target:xhtml) will also be set.
+  XHTML files, so $code(target:html) and $code(target:xhtml) will also be set.
 
 
 == DocBook
