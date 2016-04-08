@@ -14,7 +14,7 @@ as defined by $link[>>http://projectmallard.org/if/1.0/](Mallard Conditionals 1.
   $e:hi(Added in 3.0.)
 
 - $code("$link[>>http://projectmallard.org/cache/1.0/](cache/1.0)")
-* Yelp supports the upcoming $link[>>http://projectmallard.org/cache/1.0/](Cache
+* Yelp supports the $link[>>http://projectmallard.org/cache/1.0/](Cache
   Files 1.0) extension for creating a cache file with information about the
   pages in the documents. The Yelp stylesheets require a cache file to work
   correctly. Use $cmd(yelp-build cache) to create a cache file.
