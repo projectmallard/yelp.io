@@ -77,10 +77,6 @@ div.trails {
   background: transparent;
   padding: 0 20px;
 }
-div.page {
-  max-width: 800px;
-  border: none;
-}
 div.hgroup {
   font-family: Bitter;
 }
