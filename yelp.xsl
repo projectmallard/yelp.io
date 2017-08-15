@@ -46,8 +46,6 @@ div.top {
   border-bottom: solid 1px #d3d7cf;
 }
 div.top > div.inner {
-  max-width: 800px;
-  margin: 0 auto;
   font-family: Bitter;
   text-shadow: 1px 1px 0 white;
 }
@@ -120,7 +118,7 @@ td.td-no {
       <xsl:value-of select="$mal.link.extension"/>
     </xsl:if>
   </xsl:variable>
-  <div class="top"><div class="inner">
+  <div class="top"><div class="inner pagewide">
     <a href="{$mal.site.root}{$rootlink}">
       <img src="{$mal.site.root}yelp.png" width="128" height="128"/>
       <h1>Yelp</h1>
