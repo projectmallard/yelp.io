@@ -1,0 +1,3009 @@
+= Syntax Highlighting
+@link[guide >features]
+
+Yelp supports syntax highlighting in code blocks and screens.
+Syntax highlighting is done at display time using $link[>>https://highlightjs.org/](highlight.js).
+The Yelp XSLT stylesheets include a copy of highlight.js with a selection of supported languages.
+
+To add other languages, you will need to build your own copy of highlight.js.
+You can follow the $link[>>https://gitlab.gnome.org/GNOME/yelp-xsl/blob/master/js/README.duck](instructions)
+in the yelp-xsl repository, or use the methods on $link[>>https://highlightjs.org/download/](highlightjs.org).
+In addition to using a custom highlight.js, you will also need to implement
+$link[>/xsl/html.syntax.class.mode] in your extension stylesheet.
+If you would like another language included by default,
+$link[>>https://gitlab.gnome.org/GNOME/yelp-xsl/issues](file a feature request).
+
+[-] FIXME: would be nice to have a separate page with detailed instructions on adding langs
+
+Unlike some syntax highlighters, highlight.js allows inline markup in code blocks,
+such as links or highlights.
+It also uses clear consistent CSS class names that don't conflict with the class names used by Yelp.
+
+The remainder of this page lists the default supported languages,
+along with the appropriate attribute values to use in each source format.
+Mallard 1.0 used the $code(mime) attribute.
+You should prefer the $code(type) attribute for Mallard 1.1 and later versions.
+DocBook uses the $code(language) attribute.
+DITA uses the $code(outputclass) attribute.
+In nearly all cases, the recognized values of the $code(type), $code(language),
+and $code(outputclass) attributes are the same.
+In a few cases, additional values are supported in certain source languages for compatibility with other tools.
+
+[links section]
+
+
+== ActionScript
+   [#actionscript]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="actionscript">
+<code mime="application/x-actionscript">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code actionscript]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="actionscript">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="actionscript">
+
+[example]
+[code actionscript]
+[[[
+package org.example.dummy {
+    import org.dummy.*;
+
+    /*define package inline interface*/
+    public interface IFooBarzable {
+        public function foo(... pairs):Array;
+    }
+
+    public class FooBar implements IFooBarzable {
+        static private var cnt:uint = 0;
+        private var bar:String;
+
+        //constructor
+        public function TestBar(bar:String):void {
+            bar = bar;
+            ++cnt;
+        }
+
+        public function foo(... pairs):Array {
+            pairs.push(bar);
+            return pairs;
+        }
+    }
+}
+]]]
+
+
+== Apache
+   [#apache]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="apache">
+<code mime="text/x-apacheconf">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code apache]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="apache">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="apache">
+
+[example]
+[code apache]
+[[[
+  # rewrite`s rules for wordpress pretty url
+  LoadModule rewrite_module  modules/mod_rewrite.so
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . index.php [NC,L]
+
+  ExpiresActive On
+  ExpiresByType application/x-javascript  "access plus 1 days"
+
+  Order Deny,Allow
+  Allow from All
+
+  <Location /maps/>
+    RewriteMap map txt:map.txt
+    RewriteMap lower int:tolower
+    RewriteCond %{REQUEST_URI} ^/([^/.]+)\.html$ [NC]
+    RewriteCond ${map:${lower:%1}|NOT_FOUND} !NOT_FOUND
+    RewriteRule .? /index.php?q=${map:${lower:%1}} [NC,L]
+  </Location>
+]]]
+
+
+== AsciiDoc
+   [#asciidoc]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="asciidoc">
+<code type="adoc">
+<code mime="text/x-asciidoc">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code asciidoc]
+$[code adoc]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="asciidoc">
+<programlisting language="adoc">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="asciidoc">
+<codeblock outputclass="adoc">
+
+[example]
+[code asciidoc]
+[[[
+Hello, World!
+============
+Author Name, <author@domain.foo>
+
+you can write text http://example.com[with links], optionally
+using an explicit link:http://example.com[link prefix].
+
+* single quotes around a phrase place 'emphasis'
+** alternatively, you can put underlines around a phrase to add _emphasis_
+* astericks around a phrase make the text *bold*
+* pluses around a phrase make it +monospaced+
+* `smart' quotes using a leading backtick and trailing single quote
+** use two of each for double ``smart'' quotes
+
+- escape characters are supported
+- you can escape a quote inside emphasized text like 'here\'s johnny!'
+
+term:: definition
+ another term:: another definition
+
+// this is just a comment
+
+Let's make a break.
+
+'''
+
+////
+we'll be right with you
+
+after this brief interruption.
+////
+
+== We're back!
+
+Want to see a image::images/tiger.png[Tiger]?
+
+.Nested highlighting
+++++
+<this_is inline="xml"></this_is>
+++++
+
+____
+asciidoc is so powerful.
+____
+
+another quote:
+
+[quote, Sir Arthur Conan Doyle, The Adventures of Sherlock Holmes]
+____
+When you have eliminated all which is impossible, then whatever remains, however improbable, must be the truth.
+____
+
+Getting Literal
+---------------
+
+ want to get literal? prefix a line with a space.
+
+....
+I'll join that party, too.
+....
+
+. one thing (yeah!)
+. two thing `i can write code`, and `more` wipee!
+
+NOTE: AsciiDoc is quite cool, you should try it.
+]]]
+
+
+== Awk
+   [#wk]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="awk">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code awk]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="awk">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="awk">
+
+$hi(Since 3.34)
+
+[example]
+[code awk]
+[[[
+BEGIN {
+  POPService  = "/inet/tcp/0/emailhost/pop3"
+  RS = ORS = "\r\n"
+  print "user name"            |& POPService
+  POPService                    |& getline
+  print "pass password"         |& POPService
+  POPService                    |& getline
+  print "retr 1"                |& POPService
+  POPService                    |& getline
+  if ($1 != "+OK") exit
+  print "quit"                  |& POPService
+  RS = "\r\n\\.\r\n"
+  POPService |& getline
+  print $0
+  close(POPService)
+}
+]]]
+
+
+== Bash
+   [#bash]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="bash">
+<code type="csh">
+<code type="sh">
+<code mime="application/x-shellscript">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code bash]
+$[code csh]
+$[code sh]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="bash">
+<programlisting language="bourne">
+<programlisting language="csh">
+<programlisting language="sh">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="bash">
+<codeblock outputclass="bourne">
+<codeblock outputclass="csh">
+<codeblock outputclass="sh">
+
+[example]
+[code bash]
+[[[
+#!/bin/bash
+
+###### CONFIG
+ACCEPTED_HOSTS="/root/.hag_accepted.conf"
+BE_VERBOSE=false
+
+if [ "$UID" -ne 0 ]
+then
+ echo "Superuser rights required"
+ exit 2
+fi
+
+genApacheConf(){
+ echo -e "# Host ${HOME_DIR}$1/$2 :"
+]]]
+
+
+== C
+   [#c]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="c">
+<code mime="text/x-csrc">
+<code mime="text/x-chdr">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code c]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="c">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="c">
+
+[example]
+[code c]
+[[[
+#include <iostream>
+
+int main(int argc, char *argv[]) {
+
+  /* An annoying "Hello World" example */
+  for (auto i = 0; i < 0xFFFF; i++)
+    cout << "Hello, World!" << endl;
+
+  char c = '\n';
+  unordered_map <string, vector<string> > m;
+  m["key"] = "\\\\"; // this is an error
+
+  return -2e3 + 12l;
+}
+]]]
+
+
+== C#
+   [#cs]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="cs">
+<code type="csharp">
+<code mime="text/x-csharp">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code cs]
+$[code csharp]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="cs">
+<programlisting language="csharp">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="cs">
+<codeblock outputclass="csharp">
+
+[example]
+[code cs]
+[[[
+using System.IO.Compression;
+
+#pragma warning disable 414, 3021
+
+namespace MyApplication
+{
+    [Obsolete("...")]
+    class Program : IInterface
+    {
+        public static List<int> JustDoIt(int count)
+        {
+            Console.WriteLine($"Hello {Name}!");
+            return new List<int>(new int[] { 1, 2, 3 })
+        }
+    }
+}
+]]]
+
+
+== C++
+   [#cpp]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="cpp">
+<code type="c++">
+<code mime="text/x-c++hdr">
+<code mime="text/x-c++src">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code cpp]
+$[code c++]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="cpp">
+<programlisting language="c++">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="cpp">
+<codeblock outputclass="c++">
+
+[example]
+[code cpp]
+[[[
+#include <iostream>
+
+int main(int argc, char *argv[]) {
+
+  /* An annoying "Hello World" example */
+  for (auto i = 0; i < 0xFFFF; i++)
+    cout << "Hello, World!" << endl;
+
+  char c = '\n';
+  unordered_map <string, vector<string> > m;
+  m["key"] = "\\\\"; // this is an error
+
+  return -2e3 + 12l;
+}
+]]]
+
+
+== Clojure
+   [#clojure]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="clojure">
+<code type="clj">
+<code mime="application/x-clojure">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code clojure]
+$[code clj]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="clojure">
+<programlisting language="clj">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="clojure">
+<codeblock outputclass="clj">
+
+[example]
+[code clojure]
+[[[
+(def ^:dynamic chunk-size 17)
+
+(defn next-chunk [rdr]
+  (let [buf (char-array chunk-size)
+        s (.read rdr buf)]
+  (when (pos? s)
+    (java.nio.CharBuffer/wrap buf 0 s))))
+
+(defn chunk-seq [rdr]
+  (when-let [chunk (next-chunk rdr)]
+    (cons chunk (lazy-seq (chunk-seq rdr)))))
+]]]
+
+
+== CMake
+   [#cmake]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="cmake">
+<code mime="text/x-cmake">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code cmake]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="cmake">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="cmake">
+
+[example]
+[code cmake]
+[[[
+cmake_minimum_required(VERSION 2.8.8)
+project(cmake_example)
+
+# Show message on Linux platform
+if (${CMAKE_SYSTEM_NAME} MATCHES Linux)
+    message("Good choice, bro!")
+endif()
+
+# Tell CMake to run moc when necessary:
+set(CMAKE_AUTOMOC ON)
+# As moc files are generated in the binary dir,
+# tell CMake to always look for includes there:
+set(CMAKE_INCLUDE_CURRENT_DIR ON)
+
+# Widgets finds its own dependencies.
+find_package(Qt5Widgets REQUIRED)
+
+add_executable(myproject main.cpp mainwindow.cpp)
+qt5_use_modules(myproject Widgets)
+]]]
+
+
+== CSS
+   [#css]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="css">
+<code mime="text/css">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code css]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="css">
+<programlisting language="css21">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="css">
+<codeblock outputclass="css21">
+
+[example]
+[code css]
+[[[
+@font-face {
+  font-family: Chunkfive; src: url('Chunkfive.otf');
+}
+
+body, .usertext {
+  color: #F0F0F0; background: #600;
+  font-family: Chunkfive, sans;
+}
+
+@import url(print.css);
+@media print {
+  a[href^=http]::after {
+    content: attr(href)
+  }
+}
+]]]
+
+
+== D
+   [#d]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="d">
+<code mime="text/x-d">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code d]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="d">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="d">
+
+[example]
+[code d]
+[[[
+#!/usr/bin/rdmd
+// Computes average line length for standard input.
+import std.stdio;
+
+/+
+  this is a /+ nesting +/ comment
++/
+
+enum COMPILED_ON = __TIMESTAMP__;  // special token
+
+enum character = '©';
+enum copy_valid = '&copy;';
+enum backslash_escaped = '\\';
+
+// string literals
+enum str = `hello "world"!`;
+enum multiline = r"lorem
+ipsum
+dolor";  // wysiwyg string, no escapes here allowed
+enum multiline2 = "sit
+amet
+\"adipiscing\"
+elit.";
+enum hex = x"66 6f 6f";   // same as "foo"
+
+#line 5
+
+// float literals
+enum f = [3.14f, .1, 1., 1e100, 0xc0de.01p+100];
+
+static if (something == true) {
+   import std.algorithm;
+}
+
+void main() pure nothrow @safe {
+    ulong lines = 0;
+    double sumLength = 0;
+    foreach (line; stdin.byLine()) {
+        ++lines;
+        sumLength += line.length;
+    }
+    writeln("Average line length: ",
+        lines ? sumLength / lines : 0);
+}
+]]]
+
+
+== Diff
+   [#diff]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="diff">
+<code type="patch">
+<code mime="text/x-diff">
+<code mime="text/x-patch">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code diff]
+$[code patch]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="diff">
+<programlisting language="patch">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="diff">
+<codeblock outputclass="patch">
+
+[example]
+[code diff]
+[[[
+Index: languages/ini.js
+===================================================================
+--- languages/ini.js    (revision 199)
++++ languages/ini.js    (revision 200)
+@@ -1,8 +1,7 @@
+ hljs.LANGUAGES.ini =
+ {
+   case_insensitive: true,
+-  defaultMode:
+-  {
++  defaultMode: {
+     contains: ['comment', 'title', 'setting'],
+     illegal: '[^\\s]'
+   },
+
+*** /path/to/original timestamp
+--- /path/to/new      timestamp
+***************
+*** 1,3 ****
+--- 1,9 ----
++ This is an important
++ notice! It should
++ therefore be located at
++ the beginning of this
++ document!
+
+! compress the size of the
+! changes.
+
+  It is important to spell
+]]]
+
+
+== Django
+   [#django]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="django">
+<code mime="application/x-django-templating">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code django]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="django">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="django">
+
+[example]
+[code django]
+[[[
+{% if articles|length %}
+{% for article in articles %}
+
+{% custom %}
+
+{# Striped table #}
+<tr class="{% cycle odd,even %}">
+  <td>{{ article|default:"Hi... " }}</td>
+  <td {% if article.today %}class="today"{% endif %}>
+    Published on {{ article.date }}
+  </td>
+</tr>
+
+{% endfor %}
+{% endif %}
+]]]
+
+
+== Dockerfile
+   [#dockerfile]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="dockerfile">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code dockerfile]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="dockerfile">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="dockerfile">
+
+[example]
+[code dockerfile]
+[[[
+# Example instructions from https://docs.docker.com/reference/builder/
+FROM ubuntu:14.04
+
+MAINTAINER example@example.com
+
+ENV foo /bar
+WORKDIR ${foo}   # WORKDIR /bar
+ADD . $foo       # ADD . /bar
+COPY \$foo /quux # COPY $foo /quux
+ARG   VAR=FOO
+
+RUN apt-get update && apt-get install -y software-properties-common\
+    zsh curl wget git htop\
+    unzip vim telnet
+RUN ["/bin/bash", "-c", "echo hello ${USER}"]
+
+CMD ["executable","param1","param2"]
+CMD command param1 param2
+
+EXPOSE 1337
+
+ENV myName="John Doe" myDog=Rex\ The\ Dog \
+    myCat=fluffy
+
+ENV myName John Doe
+ENV myDog Rex The Dog
+ENV myCat fluffy
+
+ADD hom* /mydir/        # adds all files starting with "hom"
+ADD hom?.txt /mydir/    # ? is replaced with any single character
+
+COPY hom* /mydir/        # adds all files starting with "hom"
+COPY hom?.txt /mydir/    # ? is replaced with any single character
+COPY --from=foo / .
+
+ENTRYPOINT ["executable", "param1", "param2"]
+ENTRYPOINT command param1 param2
+
+VOLUME ["/data"]
+
+USER daemon
+
+LABEL com.example.label-with-value="foo"
+LABEL version="1.0"
+LABEL description="This text illustrates \
+that label-values can span multiple lines."
+
+WORKDIR /path/to/workdir
+
+ONBUILD ADD . /app/src
+
+STOPSIGNAL SIGKILL
+
+HEALTHCHECK --retries=3 cat /health
+
+SHELL ["/bin/bash", "-c"]
+]]]
+
+
+== DOS .bat
+   [#dos]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="dos">
+<code mime="application/x-dos-batch">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code dos]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="dos">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="dos">
+
+[example]
+[code dos]
+[[[
+cd \
+copy a b
+ping 192.168.0.1
+@rem ping 192.168.0.1
+net stop sharedaccess
+del %tmp% /f /s /q
+del %temp% /f /s /q
+ipconfig /flushdns
+taskkill /F /IM JAVA.EXE /T
+
+cd Photoshop/Adobe Photoshop CS3/AMT/
+if exist application.sif (
+    ren application.sif _application.sif
+) else (
+    ren _application.sif application.sif
+)
+
+taskkill /F /IM proquota.exe /T
+
+sfc /SCANNOW
+
+set path = test
+
+xcopy %1\*.* %2
+]]]
+
+
+== Embedded Ruby
+   [#erb]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="erb">
+<code mime="application/x-ruby-templating">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code erb]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="erb">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="erb">
+
+[example]
+[code erb]
+[[[
+<%# this is a comment %>
+
+<% @posts.each do |post| %>
+  <p><%= link_to post.title, post %></p>
+<% end %>
+
+<%- available_things = things.select(&:available?) -%>
+<%%- x = 1 + 2 -%%>
+<%% value = 'real string #{@value}' %%>
+<%%= available_things.inspect %%>
+]]]
+
+
+== F#
+   [#fsharp]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="fsharp">
+<code mime="text/x-fsharp">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code fsharp]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="fsharp">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="fsharp">
+
+[example]
+[code fsharp]
+[[[
+open System
+
+// Single line comment...
+(*
+  This is a
+  multiline comment.
+*)
+let checkList alist =
+    match alist with
+    | [] -> 0
+    | [a] -> 1
+    | [a; b] -> 2
+    | [a; b; c] -> 3
+    | _ -> failwith "List is too big!"
+
+
+let text = "Some text..."
+let text2 = @"A ""verbatim"" string..."
+let catalog = """
+Some "long" string...
+"""
+
+let rec fib x = if x <= 2 then 1 else fib(x-1) + fib(x-2)
+
+let fibs =
+    Async.Parallel [ for i in 0..40 -> async { return fib(i) } ]
+    |> Async.RunSynchronously
+
+type Sprocket(gears) =
+  member this.Gears : int = gears
+
+[<AbstractClass>]
+type Animal =
+  abstract Speak : unit -> unit
+
+type Widget =
+  | RedWidget
+  | GreenWidget
+
+type Point = {X: float; Y: float;}
+
+[<Measure>]
+type s
+let minutte = 60<s>
+
+type DefaultMailbox<'a>() =
+    let mutable inbox = ConcurrentQueue<'a>()
+    let awaitMsg = new AutoResetEvent(false)
+]]]
+
+
+== Go
+   [#go]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="go">
+<code mime="text/x-go">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code go]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="go">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="go">
+
+[example]
+[code go]
+[[[
+package main
+
+import "fmt"
+
+func main() {
+    ch := make(chan float64)
+    ch <- 1.0e10    // magic number
+    x, ok := <- ch
+    defer fmt.Println(`exitting now\`)
+    go println(len("hello world!"))
+    return
+}
+]]]
+
+
+== Haml
+   [#haml]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="haml">
+<code mime="text/x-haml">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code haml]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="haml">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="haml">
+
+[example]
+[code haml]
+[[[
+!!! XML
+%html
+  %body
+    %h1.jumbo{:id=>"a", :style=>'font-weight: normal', :title=>title} highlight.js
+    /html comment
+    -# ignore this line
+    %ul(style='margin: 0')
+    -items.each do |i|
+      %i= i
+    = variable
+    =variable2
+    ~ variable3
+    ~variable4
+    The current year is #{DataTime.now.year}.
+]]]
+
+
+== Haskell
+   [#haskell]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="haskell">
+<code type="hs">
+<code mime="text/x-haskell">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code haskell]
+$[code hs]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="haskell">
+<programlisting language="hs">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="haskell">
+<codeblock outputclass="hs">
+
+[example]
+[code haskell]
+[[[
+{-# LANGUAGE TypeSynonymInstances #-}
+module Network.UDP
+( DataPacket(..)
+, openBoundUDPPort
+, openListeningUDPPort
+, pingUDPPort
+, sendUDPPacketTo
+, recvUDPPacket
+, recvUDPPacketFrom
+) where
+
+import qualified Data.ByteString as Strict (ByteString, concat, singleton)
+import qualified Data.ByteString.Lazy as Lazy (ByteString, toChunks, fromChunks)
+import Data.ByteString.Char8 (pack, unpack)
+import Network.Socket hiding (sendTo, recv, recvFrom)
+import Network.Socket.ByteString (sendTo, recv, recvFrom)
+
+-- Type class for converting StringLike types to and from strict ByteStrings
+class DataPacket a where
+  toStrictBS :: a -> Strict.ByteString
+  fromStrictBS :: Strict.ByteString -> a
+
+instance DataPacket Strict.ByteString where
+  toStrictBS = id
+  {-# INLINE toStrictBS #-}
+  fromStrictBS = id
+  {-# INLINE fromStrictBS #-}
+
+openBoundUDPPort :: String -> Int -> IO Socket
+openBoundUDPPort uri port = do
+  s <- getUDPSocket
+  bindAddr <- inet_addr uri
+  let a = SockAddrInet (toEnum port) bindAddr
+  bindSocket s a
+  return s
+
+pingUDPPort :: Socket -> SockAddr -> IO ()
+pingUDPPort s a = sendTo s (Strict.singleton 0) a >> return ()
+]]]
+
+
+== HTML
+   [#html]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="html">
+<code type="xhtml">
+<code mime="text/html">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code html]
+$[code xhtml]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="html">
+<programlisting language="xhtml">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="html">
+<codeblock outputclass="xhtml">
+
+[example]
+[code html]
+[[[
+<!DOCTYPE html>
+<title>Title</title>
+
+<style>body {width: 500px;}</style>
+
+<script type="application/javascript">
+  function $init() {return true;}
+</script>
+
+<body>
+  <p checked class="title" id='title'>Title</p>
+  <!-- here goes the rest of the page -->
+</body>
+]]]
+
+
+== HTTP
+   [#http]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="http">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code http]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="http">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="http">
+
+[example]
+[code http]
+[[[
+POST /task?id=1 HTTP/1.1
+Host: example.org
+Content-Type: application/json; charset=utf-8
+Content-Length: 137
+
+{
+  "status": "ok",
+  "extended": true,
+  "results": [
+    {"value": 0, "type": "int64"},
+    {"value": 1.0e+3, "type": "decimal"}
+  ]
+}
+]]]
+
+
+== INI
+   [#ini]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="ini">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code ini]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="ini">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="ini">
+
+[example]
+[code ini]
+[[[
+; boilerplate
+[package]
+name = "some_name"
+authors = ["Author"]
+description = "This is \
+a description"
+
+[[lib]]
+name = ${NAME}
+default = True
+auto = no
+counter = 1_000
+]]]
+
+
+== Java
+   [#java]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="java">
+<code mime="text/x-java">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code java]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="java">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="java">
+
+[example]
+[code java]
+[[[
+/**
+ * @author John Smith <john.smith@example.com>
+*/
+package l2f.gameserver.model;
+
+public abstract class L2Char extends L2Object {
+  public static final Short ERROR = 0x0001;
+
+  public void moveTo(int x, int y, int z) {
+    _ai = null;
+    log("Should not be called");
+    if (1 > 5) { // wtf!?
+      return;
+    }
+  }
+}
+]]]
+
+
+== JavaScript
+   [#javascript]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="javascript">
+<code type="js">
+<code mime="application/javascript">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code javascript]
+$[code js]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="javascript">
+<programlisting language="js">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="javascript">
+<codeblock outputclass="js">
+
+[example]
+[code javascript]
+[[[
+function $initHighlight(block, cls) {
+  try {
+    if (cls.search(/\bno\-highlight\b/) != -1)
+      return process(block, true, 0x0F) +
+             ` class="${cls}"`;
+  } catch (e) {
+    /* handle exception */
+  }
+  for (var i = 0 / 2; i < classes.length; i++) {
+    if (checkCondition(classes[i]) === undefined)
+      console.log('undefined');
+  }
+
+  return (
+    <div>
+      <web-component>{block}</web-component>
+    </div>
+  )
+}
+
+export  $initHighlight;
+]]]
+
+
+== JSON
+   [#json]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="json">
+<code mime="application/json">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code json]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="json">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="json">
+
+[example]
+[code json]
+[[[
+[
+  {
+    "title": "apples",
+    "count": [12000, 20000],
+    "description": {"text": "...", "sensitive": false}
+  },
+  {
+    "title": "oranges",
+    "count": [17500, null],
+    "description": {"text": "...", "sensitive": false}
+  }
+]
+]]]
+
+
+
+== LISP
+   [#lisp]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="lisp">
+<code type="el">
+<code type="cl">
+<code type="lsp">
+<code mime="application/x-lisp">
+<code mime="text/x-emacs-lisp">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code lisp]
+$[code el]
+$[code cl]
+$[code lsp]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="lisp">
+<programlisting language="el">
+<programlisting language="cl">
+<programlisting language="lsp">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="lisp">
+<codeblock outputclass="el">
+<codeblock outputclass="cl">
+<codeblock outputclass="lsp">
+
+[example]
+[code lisp]
+[[[
+#!/usr/bin/env csi
+
+(defun prompt-for-cd ()
+   "Prompts
+    for CD"
+   (prompt-read "Title" 1.53 1 2/4 1.7 1.7e0 2.9E-4 +42 -7 #b001 #b001/100 #o777 #O777 #xabc55 #c(0 -5.6))
+   (prompt-read "Artist" &rest)
+   (or (parse-integer (prompt-read "Rating") :junk-allowed t) 0)
+  (if x (format t "yes") (format t "no" nil) ;and here comment
+  )
+  ;; second line comment
+  '(+ 1 2)
+  (defvar *lines*)                ; list of all lines
+  (position-if-not #'sys::whitespacep line :start beg))
+  (quote (privet 1 2 3))
+  '(hello world)
+  (* 5 7)
+  (1 2 34 5)
+  (:use "aaaa")
+  (let ((x 10) (y 20))
+    (print (+ x y))
+  )
+]]]
+
+
+== Lua
+   [#lua]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="lua">
+<code mime="text/x-lua">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code lua]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="lua">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="lua">
+
+[example]
+[code lua]
+[[[
+--[[
+Simple signal/slot implementation
+]]
+local signal_mt = {
+    __index = {
+        register = table.insert
+    }
+}
+function signal_mt.__index:emit(... --[[ Comment in params ]])
+    for _, slot in ipairs(self) do
+        slot(self, ...)
+    end
+end
+local function create_signal()
+    return setmetatable({}, signal_mt)
+end
+
+-- Signal test
+local signal = create_signal()
+signal:register(function(signal, ...)
+    print(...)
+end)
+signal:emit('Answer to Life, the Universe, and Everything:', 42)
+
+--[==[ [=[ [[
+Nested ]]
+multi-line ]=]
+comment ]==]
+[==[ Nested
+[=[ multi-line
+[[ string
+]] ]=] ]==]
+]]]
+
+
+== Makefile
+   [#makefile]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="makefile">
+<code type="make">
+<code mime="text/x-makefile">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code makefile]
+$[code make]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="makefile">
+<programlisting language="make">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="makefile">
+<codeblock outputclass="make">
+
+[example]
+[code makefile]
+[[[
+# Makefile
+
+BUILDDIR      = _build
+EXTRAS       ?= $(BUILDDIR)/extras
+
+.PHONY: main clean
+
+main:
+	@echo "Building main facility..."
+	build_main $(BUILDDIR)
+
+clean:
+	rm -rf $(BUILDDIR)/*
+]]]
+
+
+== Markdown
+   [#markdown]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="markdown">
+<code type="md">
+<code mime="text/x-markdown">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code markdown]
+$[code md]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="markdown">
+<programlisting language="md">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="markdown">
+<codeblock outputclass="md">
+
+[example]
+[code markdown]
+[[[
+# hello world
+
+you can write text [with links](http://example.com) inline or [link references][1].
+
+* one _thing_ has *em*phasis
+* two __things__ are **bold**
+
+[1]: http://example.com
+
+---
+
+hello world
+===========
+
+<this_is inline="xml"></this_is>
+
+> markdown is so cool
+
+    so are code segments
+
+1. one thing (yeah!)
+2. two thing `i can write code`, and `more` wipee!
+]]]
+
+
+== MATLAB/Octave
+   [#matlab]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="matlab">
+<code type="octave">
+<code mime="text/x-matlab">
+<code mime="text/x-octave">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code matlab]
+$[code octave]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="matlab">
+<programlisting language="octave">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="matlab">
+<codeblock outputclass="octave">
+
+[example]
+[code matlab]
+[[[
+n = 20; % number of points
+points = [random('unid', 100, n, 1), random('unid', 100, n, 1)];
+len = zeros(1, n - 1);
+points = sortrows(points);
+%% Initial set of points
+plot(points(:,1),points(:,2));
+for i = 1: n-1
+    len(i) = points(i + 1, 1) - points(i, 1);
+end
+while(max(len) > 2 * min(len))
+    [d, i] = max(len);
+    k = on_margin(points, i, d, -1);
+    m = on_margin(points, i + 1, d, 1);
+    xm = 0; ym = 0;
+%% New point
+    if(i == 1 || i + 1 == n)
+        xm = mean(points([i,i+1],1))
+        ym = mean(points([i,i+1],2))
+    else
+        [xm, ym] = dlg1(points([k, i, i + 1, m], 1), ...
+            points([k, i, i + 1, m], 2))
+    end
+
+    points = [ points(1:i, :); [xm, ym]; points(i + 1:end, :)];
+end
+
+%{
+    This is a block comment. Please ignore me.
+%}
+
+function [net] = get_fit_network(inputs, targets)
+    % Create Network
+    numHiddenNeurons = 20;  % Adjust as desired
+    net = newfit(inputs,targets,numHiddenNeurons);
+    net.trainParam.goal = 0.01;
+    net.trainParam.epochs = 1000;
+    % Train and Apply Network
+    [net,tr] = train(net,inputs,targets);
+end
+
+foo_matrix = [1, 2, 3; 4, 5, 6]''';
+foo_cell = {1, 2, 3; 4, 5, 6}''.'.';
+
+cell2flatten = {1,2,3,4,5};
+flattenedcell = cat(1, cell2flatten{:});
+]]]
+
+
+== Nginx
+   [#nginx]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="nginx">
+<code mime="text/x-nginx-conf">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code nginx]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="nginx">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="nginx">
+
+[example]
+[code nginx]
+[[[
+user  www www;
+worker_processes  2;
+pid /var/run/nginx.pid;
+error_log  /var/log/nginx.error_log  debug | info | notice | warn | error | crit;
+
+events {
+    connections   2000;
+    use kqueue | rtsig | epoll | /dev/poll | select | poll;
+}
+
+http {
+    log_format main      '$remote_addr - $remote_user [$time_local] '
+                         '"$request" $status $bytes_sent '
+                         '"$http_referer" "$http_user_agent" '
+                         '"$gzip_ratio"';
+
+    send_timeout 3m;
+    client_header_buffer_size 1k;
+
+    gzip on;
+    gzip_min_length 1100;
+
+    #lingering_time 30;
+
+    server {
+        server_name   one.example.com  www.one.example.com;
+        access_log   /var/log/nginx.access_log  main;
+
+        rewrite (.*) /index.php?page=$1 break;
+
+        location / {
+            proxy_pass         http://127.0.0.1/;
+            proxy_redirect     off;
+            proxy_set_header   Host             $host;
+            proxy_set_header   X-Real-IP        $remote_addr;
+            charset            koi8-r;
+        }
+
+        location /api/ {
+            fastcgi_pass 127.0.0.1:9000;
+        }
+
+        location ~* \.(jpg|jpeg|gif)$ {
+            root         /spool/www;
+        }
+    }
+}
+]]]
+
+
+== Objective-C
+   [#objectivec]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="objc">
+<code type="m">
+<code mime="text/x-objcsrc">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code objc]
+$[code m]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="objc">
+<programlisting language="m">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="objc">
+<codeblock outputclass="m">
+
+[example]
+[code objc]
+[[[
+
+
+#import <UIKit/UIKit.h>
+#import "Dependency.h"
+
+@protocol WorldDataSource
+@optional
+- (NSString*)worldName;
+@required
+- (BOOL)allowsToLive;
+@end
+
+@property (nonatomic, readonly) NSString *title;
+- (IBAction) show;
+@end
+]]]
+
+
+== Perl
+   [#perl]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="perl">
+<code type="pl">
+<code type="pm">
+<code mime="application/x-perl">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code perl]
+$[code pl]
+$[code pm]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="perl">
+<programlisting language="pl">
+<programlisting language="pm">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="perl">
+<codeblock outputclass="pl">
+<codeblock outputclass="pm">
+
+[example]
+[code perl]
+[[[
+# loads object
+sub load
+{
+  my $flds = $c->db_load($id,@_) || do {
+    Carp::carp "Can`t load (class: $c, id: $id): '$!'"; return undef
+  };
+  my $o = $c->_perl_new();
+  $id12 = $id / 24 / 3600;
+  $o->{'ID'} = $id12 + 123;
+  #$o->{'SHCUT'} = $flds->{'SHCUT'};
+  my $p = $o->props;
+  my $vt;
+  $string =~ m/^sought_text$/;
+  $items = split //, 'abc';
+  $string //= "bar";
+  for my $key (keys %$p)
+  {
+    if(${$vt.'::property'}) {
+      $o->{$key . '_real'} = $flds->{$key};
+      tie $o->{$key}, 'CMSBuilder::Property', $o, $key;
+    }
+  }
+  $o->save if delete $o->{'_save_after_load'};
+
+  # GH-117
+  my $g = glob("/usr/bin/*");
+
+  return $o;
+}
+
+__DATA__
+@@ layouts/default.html.ep
+<!DOCTYPE html>
+<html>
+  <head><title><%= title %></title></head>
+  <body><%= content %></body>
+</html>
+__END__
+
+=head1 NAME
+POD till the end of file
+]]]
+
+
+== PHP
+   [#php]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="php">
+<code mime="application/x-php">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code php]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="php">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="php">
+
+[example]
+[code php]
+[[[
+require_once 'Zend/Uri/Http.php';
+
+namespace Location\Web;
+
+interface Factory
+{
+    static function _factory();
+}
+
+abstract class URI extends BaseURI implements Factory
+{
+    abstract function test();
+
+    public static $st1 = 1;
+    const ME = "Yo";
+    var $list = NULL;
+    private $var;
+
+    /**
+     * Returns a URI
+     *
+     * @return URI
+     */
+    static public function _factory($stats = array(), $uri = 'http')
+    {
+        echo __METHOD__;
+        $uri = explode(':', $uri, 0b10);
+        $schemeSpecific = isset($uri[1]) ? $uri[1] : '';
+        $desc = 'Multi
+line description';
+
+        // Security check
+        if (!ctype_alnum($scheme)) {
+            throw new Zend_Uri_Exception('Illegal scheme');
+        }
+
+        $this->var = 0 - self::$st;
+        $this->list = list(Array("1"=> 2, 2=>self::ME, 3 => \Location\Web\URI::class));
+
+        return [
+            'uri'   => $uri,
+            'value' => null,
+        ];
+    }
+}
+
+echo URI::ME . URI::$st1;
+
+__halt_compiler () ; datahere
+datahere
+datahere */
+datahere
+]]]
+
+
+== Python
+   [#python]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="python">
+<code type="py">
+<code mime="text/x-python">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code python]
+$[code py]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="python">
+<programlisting language="py">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="python">
+<codeblock outputclass="py">
+
+[example]
+[code python]
+[[[
+@requires_authorization
+def somefunc(param1='', param2=0):
+    r'''A docstring'''
+    if param1 > param2: # interesting
+        print 'Gre\'ater'
+    return (param2 - param1 + 1 + 0b10l) or None
+
+class SomeClass:
+    pass
+
+>>> message = '''interpreter
+... prompt'''
+]]]
+
+
+== R/S
+   [#r]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="r">
+<code type="s">
+<code mime="text/x-r">
+<code mime="text/x-s">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code r]
+$[code s]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="r">
+<programlisting language="s">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="r">
+<codeblock outputclass="s">
+
+[example]
+[code r]
+[[[
+library(ggplot2)
+
+centre <- function(x, type, ...) {
+  switch(type,
+         mean = mean(x),
+         median = median(x),
+         trimmed = mean(x, trim = .1))
+}
+
+myVar1
+myVar.2
+data$x
+foo "bar" baz
+# test "test"
+"test # test"
+
+(123) (1) (10) (0.1) (.2) (1e-7)
+(1.2e+7) (2e) (3e+10) (0x0) (0xa)
+(0xabcdef1234567890) (123L) (1L)
+(0x10L) (10000000L) (1e6L) (1.1L)
+(1e-3L) (4123.381E-10i)
+(3.) (3.E10) # BUG: .E10 should be part of number
+
+# Numbers in some different contexts
+1L
+0x40
+.234
+3.
+1L + 30
+plot(cars, xlim=20)
+plot(cars, xlim=0x20)
+foo<-30
+my.data.3 <- read() # not a number
+c(1,2,3)
+1%%2
+
+"this is a quote that spans
+multiple lines
+\"
+
+is this still a quote? it should be.
+# even still!
+
+" # now we're done.
+
+'same for
+single quotes #'
+
+# keywords
+NULL, NA, TRUE, FALSE, Inf, NaN, NA_integer_,
+NA_real_, NA_character_, NA_complex_, function,
+while, repeat, for, if, in, else, next, break,
+..., ..1, ..2
+
+# not keywords
+the quick brown fox jumped over the lazy dogs
+null na true false inf nan na_integer_ na_real_
+na_character_ na_complex_ Function While Repeat
+For If In Else Next Break .. .... "NULL" `NULL` 'NULL'
+
+# operators
++, -, *, /, %%, ^, >, >=, <, <=, ==, !=, !, &, |, ~,
+->, <-, <<-, $, :, ::
+
+# infix operator
+foo %union% bar
+%"test"%
+`"test"`
+]]]
+
+
+== Ruby
+   [#ruby]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="ruby">
+<code type="rb">
+<code mime="application/x-ruby">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code ruby]
+$[code rb]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="ruby">
+<programlisting language="rb">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="ruby">
+<codeblock outputclass="rb">
+
+[example]
+[code ruby]
+[[[
+# The Greeter class
+class Greeter
+  def initialize(name)
+    @name = name.capitalize
+  end
+
+  def salute
+    puts "Hello #{@name}!"
+  end
+end
+
+g = Greeter.new("world")
+g.salute
+]]]
+
+
+== Rust
+   [#rust]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="rust">
+<code mime="text/x-rust">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code rust]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="rust">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="rust">
+
+[example]
+[code rust]
+[[[
+#[derive(Debug)]
+pub enum State {
+    Start,
+    Transient,
+    Closed,
+}
+
+impl From<&'a str> for State {
+    fn from(s: &'a str) -> Self {
+        match s {
+            "start" => State::Start,
+            "closed" => State::Closed,
+            _ => unreachable!(),
+        }
+    }
+}
+]]]
+
+
+== Scala
+   [#scala]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="scala">
+<code mime="text/x-scala">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code scala]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="scala">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="scala">
+
+[example]
+[code scala]
+[[[
+/**
+ * A person has a name and an age.
+ */
+case class Person(name: String, age: Int)
+
+abstract class Vertical extends CaseJeu
+case class Haut(a: Int) extends Vertical
+case class Bas(name: String, b: Double) extends Vertical
+
+sealed trait Ior[+A, +B]
+case class Left[A](a: A) extends Ior[A, Nothing]
+case class Right[B](b: B) extends Ior[Nothing, B]
+case class Both[A, B](a: A, b: B) extends Ior[A, B]
+
+trait Functor[F[_]] {
+  def map[A, B](fa: F[A], f: A => B): F[B]
+}
+
+// beware Int.MinValue
+def absoluteValue(n: Int): Int =
+  if (n < 0) -n else n
+
+def interp(n: Int): String =
+  s"there are $n ${color} balloons.\n"
+
+type ξ[A] = (A, A)
+
+trait Hist { lhs =>
+  def ⊕(rhs: Hist): Hist
+}
+
+def gsum[A: Ring](as: Seq[A]): A =
+  as.foldLeft(Ring[A].zero)(_ + _)
+
+val actions: List[Symbol] =
+  'init :: 'read :: 'write :: 'close :: Nil
+
+trait Cake {
+  type T;
+  type Q
+  val things: Seq[T]
+
+  abstract class Spindler
+
+  def spindle(s: Spindler, ts: Seq[T], reversed: Boolean = false): Seq[Q]
+}
+
+val colors = Map(
+  "red"       -> 0xFF0000,
+  "turquoise" -> 0x00FFFF,
+  "black"     -> 0x000000,
+  "orange"    -> 0xFF8040,
+  "brown"     -> 0x804000)
+
+lazy val ns = for {
+  x <- 0 until 100
+  y <- 0 until 100
+} yield (x + y) * 33.33
+]]]
+
+
+== Scheme
+   [#scheme]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="scheme">
+<code type="scm">
+<code mime="text/x-scheme">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code scheme]
+$[code scm]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="scheme">
+<programlisting language="scm">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="scheme">
+<codeblock outputclass="scm">
+
+[example]
+[code scheme]
+[[[
+;; Calculation of Hofstadter's male and female sequences as a list of pairs
+
+(define (hofstadter-male-female n)
+(letrec ((female (lambda (n)
+           (if (= n 0)
+           1
+           (- n (male (female (- n 1)))))))
+     (male (lambda (n)
+         (if (= n 0)
+             0
+             (- n (female (male (- n 1))))))))
+  (let loop ((i 0))
+    (if (> i n)
+    '()
+    (cons (cons (female i)
+            (male i))
+      (loop (+ i 1)))))))
+
+(hofstadter-male-female 8)
+
+(define (find-first func lst)
+(call-with-current-continuation
+ (lambda (return-immediately)
+   (for-each (lambda (x)
+       (if (func x)
+           (return-immediately x)))
+         lst)
+   #f)))
+]]]
+
+
+== Shell
+   [#shell]
+
+[synopsis]
+. Mallard
+[code xml]
+<screen type="shell">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[screen shell]
+
+[synopsis]
+. DocBook
+[code xml]
+<screen language="shell">
+
+[synopsis]
+. DITA
+[code xml]
+<screen outputclass="shell">
+
+$hi(Since 3.34)
+
+[note]
+Because the $code(shell) highlighter is for interactive shell sessions,
+it is better to use it with the $code(screen) element.
+
+[example]
+[screen shell]
+[[[
+$ echo $EDITOR
+vim
+$ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+$ git push
+Everything up-to-date
+$ echo 'All
+> done!'
+All
+done!
+]]]
+
+
+== Smalltalk
+   [#smalltalk]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="smalltalk">
+<code mime="text/x-smalltalk">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code smalltalk]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="smalltalk">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="smalltalk">
+
+[example]
+[code smalltalk]
+[[[
+Object>>method: num
+    "comment 123"
+    | var1 var2 |
+    (1 to: num) do: [:i | |var| ^i].
+    Klass with: var1.
+    Klass new.
+    arr := #('123' 123.345 #hello Transcript var $@).
+    arr := #().
+    var2 = arr at: 3.
+    ^ self abc
+
+heapExample
+    "HeapTest new heapExample"
+    "Multiline
+    decription"
+    | n rnd array time sorted |
+    n := 5000.
+    "# of elements to sort"
+    rnd := Random new.
+    array := (1 to: n)
+                collect: [:i | rnd next].
+    "First, the heap version"
+    time := Time
+                millisecondsToRun: [sorted := Heap withAll: array.
+    1
+        to: n
+        do: [:i |
+            sorted removeFirst.
+            sorted add: rnd next]].
+    Transcript cr; show: 'Time for Heap: ' , time printString , ' msecs'.
+    "The quicksort version"
+    time := Time
+                millisecondsToRun: [sorted := SortedCollection withAll: array.
+    1
+        to: n
+        do: [:i |
+            sorted removeFirst.
+            sorted add: rnd next]].
+    Transcript cr; show: 'Time for SortedCollection: ' , time printString , ' msecs'
+]]]
+
+
+== SQL
+   [#sql]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="sql">
+<code mime="application/sql">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code sql]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="sql">
+<programlisting language="sql92">
+<programlisting language="sql1999">
+<programlisting language="sql2003">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="sql">
+<codeblock outputclass="sql92">
+<codeblock outputclass="sql1999">
+<codeblock outputclass="sql2003">
+
+[example]
+[code sql]
+[[[
+CREATE TABLE "topic" (
+    "id" serial NOT NULL PRIMARY KEY,
+    "forum_id" integer NOT NULL,
+    "subject" varchar(255) NOT NULL
+);
+ALTER TABLE "topic"
+ADD CONSTRAINT forum_id FOREIGN KEY ("forum_id")
+REFERENCES "forum" ("id");
+
+-- Initials
+insert into "topic" ("forum_id", "subject")
+values (2, 'D''artagnian');
+]]]
+
+
+== TCL
+   [#tcl]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="tcl">
+<code mime="application/x-tcl">
+<code mime="text/x-tcl">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code tcl]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="tcl">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="tcl">
+
+[example]
+[code tcl]
+[[[
+package json
+
+source helper.tcl
+# randomness verified by a die throw
+set ::rand 4
+
+proc give::recursive::count {base p} { ; # 2 mandatory params
+    while {$p > 0} {
+        set result [expr $result * $base]; incr p -1
+    }
+    return $result
+}
+
+set a {a}; set b "bcdef"; set lst [list "item"]
+puts [llength $a$b]
+
+set ::my::tid($id) $::my::tid(def)
+lappend lst $arr($idx) $::my::arr($idx) $ar(key)
+lreplace ::my::tid($id) 4 4
+puts $::rand ${::rand} ${::AWESOME::component::variable}
+
+puts "$x + $y is\t [expr $x + $y]"
+
+proc isprime x {
+    expr {$x>1 && ![regexp {^(oo+?)\1+$} [string repeat o $x]]}
+}
+]]]
+
+
+== TeX
+   [#tex]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="tex">
+<code mime="text/x-tex">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code tex]
+$[code latex]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="tex">
+<programlisting language="latex">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="tex">
+<codeblock outputclass="latex">
+
+[example]
+[code tex]
+[[[
+\documentclass{article}
+\usepackage[koi8-r]{inputenc}
+\hoffset=0pt
+\voffset=.3em
+\tolerance=400
+\newcommand{\eTiX}{\TeX}
+\begin{document}
+\section*{Highlight.js}
+\begin{table}[c|c]
+$\frac 12\, + \, \frac 1{x^3}\text{Hello \! world}$ & \textbf{Goodbye\~ world} \\\eTiX $ \pi=400 $
+\end{table}
+Ch\'erie, \c{c}a ne me pla\^\i t pas! % comment \b
+G\"otterd\"ammerung~45\%=34.
+$$
+    \int\limits_{0}^{\pi}\frac{4}{x-7}=3
+$$
+\end{document}
+]]]
+
+
+== Vala
+   [#vala]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="vala">
+<code mime="text/x-vala">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code vala]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="vala">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="vala">
+
+[example]
+[code vala]
+[[[
+using DBus;
+
+namespace Test {
+  class Foo : Object {
+    public signal void some_event ();   // definition of the signal
+    public void method () {
+      some_event ();                    // emitting the signal (callbacks get invoked)
+    }
+  }
+}
+
+/* defining a class */
+class Track : GLib.Object, Test.Foo {              /* subclassing 'GLib.Object' */
+  public double mass;                  /* a public field */
+  public double name { get; set; }     /* a public property */
+  private bool terminated = false;     /* a private field */
+  public void terminate() {            /* a public method */
+    terminated = true;
+  }
+}
+
+const ALL_UPPER_CASE = "you should follow this convention";
+
+var t = new Track();      // same as: Track t = new Track();
+var s = "hello";          // same as: string s = "hello";
+var l = new List<int>();       // same as: List<int> l = new List<int>();
+var i = 10;               // same as: int i = 10;
+
+
+#if (ololo)
+Regex regex = /foo/;
+#endif
+
+/*
+ * Entry point can be outside class
+ */
+void main () {
+  var long_string = """
+    Example of "verbatim string".
+    Same as in @"string" in C#
+  """
+  var foo = new Foo ();
+  foo.some_event.connect (callback_a);      // connecting the callback functions
+  foo.some_event.connect (callback_b);
+  foo.method ();
+}
+]]]
+
+
+== XML
+   [#xml]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="xml">
+<code mime="application/xml">
+<code mime="$var(some/type)+xml">
+
+[note]
+It is common to create MIME types for XML formats by adding $sys(+xml) to the end.
+Any MIME type ending with $sys(+xml) will match for the XML highlighter.
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code xml]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="xml">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="xml">
+
+[example]
+[code xml]
+[[[
+<!DOCTYPE html>
+<title>Title</title>
+
+<style>body {width: 500px;}</style>
+
+<script type="application/javascript">
+  function $init() {return true;}
+</script>
+
+<body>
+  <p checked class="title" id='title'>Title</p>
+  <!-- here goes the rest of the page -->
+</body>
+]]]
+
+
+== XQuery
+   [#xquery]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="xquery">
+<code type="xq">
+<code mime="application/xquery">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code xquery]
+$[code xq]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="xquery">
+<programlisting language="xq">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="xquery">
+<codeblock outputclass="xq">
+
+[example]
+[code xquery]
+[[[
+xquery version "3.1";
+(:~
+ : @author Duncan Paterson
+ : @version 1.0:)
+
+declare variable $local:num := math:log10(12345);
+
+(
+let $map := map { 'R': 'red', 'G': 'green', 'B': 'blue' }
+return (
+  $map?*          (: 1. returns all values; same as: map:keys($map) ! $map(.) :),
+  $map?R          (: 2. returns the value associated with the key 'R'; same as: $map('R') :),
+  $map?('G','B')  (: 3. returns the values associated with the key 'G' and 'B' :)
+),
+
+declare function local:city($country as node()*) as element (country) {
+for $country in doc('factbook')//country
+where $country/@population > 100000000
+let $name := $country/name[1]
+for $city in $country//city[population gt 1000000]
+group by $name
+return
+   element country { attribute type { $name },
+    $city/name }
+};
+
+return
+('A', 'B', 'C') => count(),
+
+<root>{local:city(.) + $local:num}</root>
+]]]
+
+
+== YAML
+   [#yaml]
+
+[synopsis]
+. Mallard
+[code xml]
+<code type="yaml">
+<code mime="application/x-yaml">
+
+[synopsis]
+. Ducktype
+[code ducktype]
+$[code yaml]
+
+[synopsis]
+. DocBook
+[code xml]
+<programlisting language="yaml">
+
+[synopsis]
+. DITA
+[code xml]
+<codeblock outputclass="yaml">
+
+[example]
+[code yaml]
+[[[
+---
+# comment
+string_1: "Bar"
+string_2: 'bar'
+string_3: bar
+inline_keys_ignored: sompath/name/file.jpg
+keywords_in_yaml:
+  - true
+  - false
+  - TRUE
+  - FALSE
+  - 21
+  - 21.0
+  - !!str 123
+"quoted_key": &foobar
+  bar: foo
+  foo:
+  "foo": bar
+
+reference: *foobar
+
+multiline_1: |
+  Multiline
+  String
+multiline_2: >
+  Multiline
+  String
+multiline_3: "
+  Multiline string
+  "
+
+ansible_variables: "foo {{variable}}"
+
+array_nested:
+- a
+- b: 1
+  c: 2
+- b
+- comment
+]]]

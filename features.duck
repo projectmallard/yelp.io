@@ -50,7 +50,7 @@ DITA Support is currently experimental and not included in the build.
 * Partial
 * No
 [tr]
-* Syntax Highlighting
+* $link[>syntax](Syntax Highlighting)
 * Yes
 * Yes
-* No 
+* Yes

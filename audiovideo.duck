@@ -26,6 +26,7 @@ attribute set to $code("poster").
 $e:hi(Added in 3.0.)
 
 == DocBook
+   [#docbook]
 @title[link] DocBook Audio & Video
 
 To add audio to a DocBook document, use the $code(audioobject) element
